@@ -52,16 +52,19 @@ public class JSONTranslator implements Translator {
                 List<String> languages = new ArrayList<>();
 
                 // TODO Task C: record this countryCode in the correct instance variable
-
+                countryCodes.add(countryCode);
                 // iterate through the other keys to get the information that we need
                 for (String key : countryData.keySet()) {
                     if (!key.equals("id") && !key.equals("alpha2") && !key.equals("alpha3")) {
                         String languageCode = key;
-                        // TODO Task C: record this translation in the appropriate instance variable
 
+                        // TODO Task C: record this translation in the appropriate instance variable
+                        languageCodes.add(languageCode);
+                        translations.put(countryCode + "-" + languageCode, countryData.getString(key));
                         if (!languages.contains(languageCode)) {
                             languages.add(languageCode);
                         }
+
                     }
                 }
             }
@@ -74,7 +77,11 @@ public class JSONTranslator implements Translator {
     @Override
     public List<String> getLanguageCodes() {
         // TODO Task C: return a copy of the language codes
-        return new ArrayList<>();
+        ArrayList<String> copy = new ArrayList<>();
+        for (int i = 0; i < languageCodes.size(); i++) {
+            copy.add(this.languageCodes.get(i));
+        }
+        return copy;
     }
 
     @Override
@@ -85,6 +92,10 @@ public class JSONTranslator implements Translator {
     @Override
     public String translate(String countryCode, String languageCode) {
         // TODO Task C: complete this method using your instance variables as needed
+        String key = countryCode + "-" + languageCode;
+        if (translations.containsKey(key)) {
+            return translations.get(key);
+        }
         return "JSONTranslator's translate method is not implemented!";
     }
 }
