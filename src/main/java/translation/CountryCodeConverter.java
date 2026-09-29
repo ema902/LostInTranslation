@@ -4,10 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * This class provides the service of converting country codes to their names and back.
@@ -41,6 +38,10 @@ public class CountryCodeConverter {
             while (iterator.hasNext()) {
                 String line = iterator.next();
                 String[] parts = line.split("\t");
+                String country = parts[0];
+                String code = parts[1];
+                this.countryCodeToCountry.put(code.toLowerCase(Locale.ROOT), country);
+                this.countryToCountryCode.put(country.toLowerCase(Locale.ROOT), code);
                 // TODO Task B: use parts to populate the instance variables
             }
         }
@@ -57,7 +58,8 @@ public class CountryCodeConverter {
      */
     public String fromCountryCode(String code) {
         // TODO Task B: update this code to use an instance variable to return the correct value
-        return code;
+        String country = countryCodeToCountry.get(code);
+        return country;
     }
 
     /**
@@ -69,7 +71,8 @@ public class CountryCodeConverter {
 
 
         // TODO Task B: update this code to use an instance variable to return the correct value
-        return country;
+        String code = countryToCountryCode.get(country);
+        return code;
     }
 
     /**
@@ -78,6 +81,6 @@ public class CountryCodeConverter {
      */
     public int getNumCountries() {
         // TODO Task B: update this code to use an instance variable to return the correct value
-        return 0;
+        return countryCodeToCountry.size();
     }
 }
