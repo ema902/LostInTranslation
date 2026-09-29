@@ -39,9 +39,9 @@ public class CountryCodeConverter {
                 String line = iterator.next();
                 String[] parts = line.split("\t");
                 String country = parts[0];
-                String code = parts[1];
-                this.countryCodeToCountry.put(code.toLowerCase(Locale.ROOT), country);
-                this.countryToCountryCode.put(country.toLowerCase(Locale.ROOT), code);
+                String code = parts[2];
+                this.countryCodeToCountry.put(code, country);
+                this.countryToCountryCode.put(country, code);
                 // TODO Task B: use parts to populate the instance variables
             }
         }
@@ -58,8 +58,7 @@ public class CountryCodeConverter {
      */
     public String fromCountryCode(String code) {
         // TODO Task B: update this code to use an instance variable to return the correct value
-        String country = countryCodeToCountry.get(code);
-        return country;
+        return countryCodeToCountry.get(code.toUpperCase(Locale.ROOT));
     }
 
     /**
@@ -69,8 +68,7 @@ public class CountryCodeConverter {
      */
     public String fromCountry(String country) {
         // TODO Task B: update this code to use an instance variable to return the correct value
-        String code = countryToCountryCode.get(country);
-        return code;
+        return countryToCountryCode.get(country);
     }
 
     /**
