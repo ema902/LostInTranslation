@@ -43,6 +43,9 @@ public class LanguageCodeConverter {
             while (iterator.hasNext()) {
                 String line = iterator.next();
                 // TODO Task A: use line to populate the instance variables
+                String[] langAndCode = line.split("\t");
+                languageCodeToLanguage.put(langAndCode[1], langAndCode[0]);
+                languageToLanguageCode.put(langAndCode[0], langAndCode[1]);
             }
 
         } catch (IOException | URISyntaxException ex) {
@@ -67,6 +70,7 @@ public class LanguageCodeConverter {
      */
     public String fromLanguage(String language) {
         // TODO Task A: update this code to use the correct instance variable to return the appropriate value
+        language = languageToLanguageCode.get(language);
         return language;
     }
 
